@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+$LOAD_PATH.unshift(File.dirname(__FILE__))
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+require 'dictionary'
+
+if ARGV.empty?
+	puts "Use anagram_extractor [source dictionary] [export dictionary location]"
+else
+  puts Dictionary.extract_anagrams(ARGV[0], ARGV[1])
+end

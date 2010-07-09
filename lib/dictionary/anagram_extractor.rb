@@ -32,8 +32,10 @@ module Dictionary
 
     # Extracts the anagrams from the provided file.
     #
-    # @return [Array] the anagram list.
+    # @param [true, false] in_c Execute the code in C.
+    # @return [Array, nil] the anagram list, or nil if no dictionary.
     def extract!
+      return unless @file
       reset_dictionaries
       File.read(@file).each_line do |word|
         word = word.strip
@@ -41,7 +43,7 @@ module Dictionary
         @anagrams += [word, has_an_anagram] if has_an_anagram
         @dictionary << word
       end
-      @anagrams
+      @anagrams = @anagrams.uniq
     end
 
     # Saves the anagram dictionary to a provided file.

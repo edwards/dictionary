@@ -39,12 +39,12 @@ describe Dictionary::AnagramExtractor do
     end
 
     it "should return four matches" do
-      @extractor.extract!.size.should == 4
+      @extractor.extract!.size.should == 5
     end
 
     it "should return four matches even if words are capitalized" do
       @extractor.file = 'extras/capitalized_english.txt'
-      @extractor.extract!.size.should == 4
+      @extractor.extract!.size.should == 5
     end
 
     it "should contain mary and army as anagrams" do
@@ -86,7 +86,7 @@ describe Dictionary::AnagramExtractor do
       @extractor.extract!
       @extractor.export 'example.txt'
 
-      File.read(@location).split("\n").size.should == 4
+      File.read(@location).split("\n").size.should == 5
     end
 
   end

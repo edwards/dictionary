@@ -61,6 +61,31 @@ describe Dictionary::AnagramExtractor do
         @extractor.extract!.select { |value| value == 'army' }.size.should == 1
       end
 
+      describe "using the C binding" do
+
+        it "should return an Array" do
+          @extractor.extract!(true).should be_an_instance_of(Array)
+        end
+
+        it "should return four matches" do
+          @extractor.extract!(true).size.should == 5
+        end
+
+        it "should return four matches even if words are capitalized" do
+          @extractor.file = 'extras/capitalized_english.txt'
+          @extractor.extract!(true).size.should == 4
+        end
+
+        it "should contain mary and army as anagrams" do
+          @extractor.extract!(true).should include('mary', 'army')
+        end
+
+        it "should not include army twice" do
+          @extractor.extract!(true).select { |value| value == 'army' }.size.should == 1
+        end
+
+      end
+
     end
 
   end

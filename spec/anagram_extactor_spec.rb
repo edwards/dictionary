@@ -44,7 +44,7 @@ describe Dictionary::AnagramExtractor do
         @extractor.extract!.should be_an_instance_of(Array)
       end
 
-      it "should return four matches" do
+      it "should return five matches" do
         @extractor.extract!.size.should == 5
       end
 
@@ -67,7 +67,7 @@ describe Dictionary::AnagramExtractor do
           @extractor.extract!(true).should be_an_instance_of(Array)
         end
 
-        it "should return four matches" do
+        it "should return five matches" do
           @extractor.extract!(true).size.should == 5
         end
 

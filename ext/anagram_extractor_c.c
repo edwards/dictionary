@@ -37,7 +37,7 @@ VALUE rb_mAnagramExtractorC_anagrams(VALUE rb_module, VALUE rb_first_word, VALUE
 		{
 			if(--occurrences[second_word[i]-'a'] < 0)
 				return Qfalse;
-		} else if(first_word[i] >= 'A' && first_word[i] <= 'Z')
+		} else if(second_word[i] >= 'A' && second_word[i] <= 'Z')
 		{
 			if(--occurrences[second_word[i]-'A'] < 0)
 				return Qfalse;

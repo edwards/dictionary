@@ -16,9 +16,10 @@ First, do:
  ruby extconf.rb
  make
 
-Then, run
+Then, run it with -c:
 
- bin/anagram_extractor [source file] [destination file]
+ bin/anagram_extractor -c [source file] [destination file]
+
 
 == Benchmarks
 

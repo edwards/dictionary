@@ -6,5 +6,9 @@ require 'dictionary'
 if ARGV.empty?
 	puts "Use anagram_extractor [source dictionary] [export dictionary location]"
 else
-  puts Dictionary.extract_anagrams(ARGV[0], ARGV[1], ARGV[2] == 'c')
+  in_c = ''
+  if ARGV[0] == '-c'
+    in_c = ARGV.shift
+  end
+  puts Dictionary.extract_anagrams(ARGV[0], ARGV[1], in_c == '-c')
 end

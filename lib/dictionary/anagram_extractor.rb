@@ -7,6 +7,8 @@ module Dictionary
   #   extractor.extract!
   #   extractor.export('anagrams.txt')
   class AnagramExtractor
+    include AnagramExtractorC
+    
     # Holds the dictionary file.
     attr_reader :file
     # Holds the anagrams extracted.
@@ -34,12 +36,12 @@ module Dictionary
     #
     # @param [true, false] in_c Execute the code in C.
     # @return [Array, nil] the anagram list, or nil if no dictionary.
-    def extract!
+    def extract!(in_c=false)
       return unless @file
       reset_dictionaries
       File.read(@file).each_line do |word|
         word = word.strip
-        has_an_anagram = anagram_for? word
+        has_an_anagram = anagram_for? word, in_c
         @anagrams += [word, has_an_anagram] if has_an_anagram
         @dictionary << word
       end
@@ -69,14 +71,19 @@ module Dictionary
       #
       # @private
       # @param [String] word the word to check
+      # @param [true, false] in_c execute the anagram verification in C
       # @return [nil, String] nil if the dictionary is empty or, there are no anagrams for 
       # this word. Else, the matching word.
-      def anagram_for?(word)
-        word_letters = word.downcase.scan(/\w/).sort
+      def anagram_for?(word, in_c=false)
+        word_letters = word.downcase.scan(/\w/).sort unless in_c
         @dictionary.find do |test_word|
-          test_word_letters = test_word.downcase.scan(/\w/)
-          test_word_letters.size == word_letters.size &&
-            test_word_letters.sort == word_letters
+          if in_c
+            anagrams? word, test_word
+          else
+            test_word_letters = test_word.downcase.scan(/\w/)
+            test_word_letters.size == word_letters.size &&
+              test_word_letters.sort == word_letters
+          end
         end
       end
 

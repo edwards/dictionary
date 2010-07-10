@@ -2,3 +2,6 @@
 doc/*
 pkg/*
 ivanvc-dictionary.gemspec
+ext/*.o
+ext/*.bundle
+ext/Makefile

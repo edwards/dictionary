@@ -2,11 +2,46 @@
 
 A sample of an AnagramExtractor
 
-= Usage
+== Usage
 
 To extract the anagrams of a dictionary, use:
 
  bin/anagram_extractor [source file] [destination file]
+
+=== To use with the C binding
+
+First, do:
+
+ cd ext
+ ruby extconf.rb
+ make
+
+Then, run
+
+ bin/anagram_extractor [source file] [destination file]
+
+== Benchmarks
+
++Done while playing music, browsing the web, etc.+
+
+Using the small file:
+
+             user     system      total        real
+ Ruby:   0.000000   0.000000   0.000000 (  0.000424)
+ C:      0.010000   0.000000   0.010000 (  0.000099)
+
+Using the big file (3k lines):
+
+             user     system      total        real
+ Ruby:  48.040000   0.380000  48.420000 ( 49.440496)
+ C:      0.180000   0.020000   0.200000 (  0.197321)
+
+Amazing! So the full English dictionary (236978 lines):
+
+             user     system      total        real
+ C:    1876.590000 119.060000 1995.650000 (2057.623276)
+
+So 34mins. for the full list of anagrams!
 
 == Copyright
 

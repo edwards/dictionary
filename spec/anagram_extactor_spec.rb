@@ -30,25 +30,37 @@ describe Dictionary::AnagramExtractor do
 
   describe ".extract!" do
 
-    before(:each) do
-      @extractor.file = 'extras/english.txt'
+    it "should return nil if no file" do
+      @extractor.extract!.should be_nil
     end
 
-    it "should return an Array" do
-      @extractor.extract!.should be_an_instance_of(Array)
-    end
+    describe "with a file" do
 
-    it "should return four matches" do
-      @extractor.extract!.size.should == 5
-    end
+      before(:each) do
+        @extractor.file = 'extras/english.txt'
+      end
 
-    it "should return four matches even if words are capitalized" do
-      @extractor.file = 'extras/capitalized_english.txt'
-      @extractor.extract!.size.should == 5
-    end
+      it "should return an Array" do
+        @extractor.extract!.should be_an_instance_of(Array)
+      end
 
-    it "should contain mary and army as anagrams" do
-      @extractor.extract!.should include('mary', 'army')
+      it "should return four matches" do
+        @extractor.extract!.size.should == 5
+      end
+
+      it "should return four matches even if words are capitalized" do
+        @extractor.file = 'extras/capitalized_english.txt'
+        @extractor.extract!.size.should == 4
+      end
+
+      it "should contain mary and army as anagrams" do
+        @extractor.extract!.should include('mary', 'army')
+      end
+
+      it "should not include army twice" do
+        @extractor.extract!.select { |value| value == 'army' }.size.should == 1
+      end
+
     end
 
   end

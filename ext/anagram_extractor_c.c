@@ -46,11 +46,6 @@ VALUE rb_mAnagramExtractorC_anagrams(VALUE rb_module, VALUE rb_first_word, VALUE
 		}
 	}
 
-	for(i = 0; i < 26; ++i) 
-		if(occurrences[i] != 0)
-			return Qfalse;	
-
-
 	return Qtrue;
 }
 
